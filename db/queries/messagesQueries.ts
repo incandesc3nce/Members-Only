@@ -7,7 +7,7 @@ const getMessages = async () => {
 
 const getMessageById = async (id: string) => {
   const { rows } = await pool.query('SELECT * FROM messages WHERE id = $1', [id]);
-  return rows;
+  return rows[0];
 };
 
 const createMessage = async (text: string) => {
@@ -15,7 +15,7 @@ const createMessage = async (text: string) => {
     'INSERT INTO messages (text) VALUES ($1) RETURNING *',
     [text],
   );
-  return rows;
+  return rows[0];
 };
 
 const updateMessage = async (id: string, text: string) => {

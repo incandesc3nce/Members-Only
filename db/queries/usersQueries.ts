@@ -5,14 +5,14 @@ const getUsers = async () => {
 	return rows;
 };
 
-const getUserById = async (id: string) => {
+const getUserById = async (id: number) => {
 	const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
-	return rows;
+	return rows[0];
 };
 
 const getUserByUsername = async (username: string) => {
 	const { rows } = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
-	return rows;
+	return rows[0];
 }
 
 const createUser = async (username: string, password: string) => {
