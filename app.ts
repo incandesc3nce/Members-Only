@@ -1,10 +1,11 @@
 import 'dotenv/config';
 import passport from 'passport';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import session from 'express-session';
 import pool from './db/pool';
 import PgSession from 'connect-pg-simple';
+import indexRouter from './routes/indexRouter';
 
 // just to satisfy TypeScript on line 47
 declare module 'express-session' {
@@ -17,9 +18,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*
- * routers
- */
+app.use('/', indexRouter);
 
 /*
  * 404
@@ -56,7 +55,7 @@ app.use((req, res, next) => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 	res.locals.message = err.message;
 	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
