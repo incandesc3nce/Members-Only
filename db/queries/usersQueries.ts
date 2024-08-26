@@ -15,7 +15,7 @@ const getUserByUsername = async (username: string) => {
 	return rows[0];
 }
 
-const createUser = async (username: string, password: string) => {
+const createUser = async (full_name: string, username: string, password: string) => {
 	const { rows } = await pool.query(
 		'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *',
 		[username, password],
@@ -23,10 +23,10 @@ const createUser = async (username: string, password: string) => {
 	return rows;
 };
 
-const updateUser = async (id: string, username: string, password: string) => {
+const updateUser = async (id: string, full_name: string, username: string, password: string, is_member: boolean) => {
 	const { rows } = await pool.query(
-		'UPDATE users SET username = $2, password = $3 WHERE id = $1 RETURNING *',
-		[id, username, password],
+		'UPDATE users SET full_name = $1, username = $2, password = $3, is_member = $4 WHERE id = $5 RETURNING *',
+		[full_name, username, password, is_member, id],
 	);
 	return rows;
 };
