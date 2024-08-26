@@ -28,36 +28,36 @@ const loginPostController = async (req: Request, res: Response) => {
 		const user = await getUserByUsername(username);
 
 		if (!user) {
-      return res.status(400).render('login', {
-        title: 'Login',
-        errors: [{ msg: 'This user does not exist' }],
-      });
-    }
+			return res.status(400).render('login', {
+				title: 'Login',
+				errors: [{ msg: 'This user does not exist' }],
+			});
+		}
 
-    const isMatch = await bcrypt.compare(password, user.password);
+		const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) {
-      return res.status(400).render('login', {
-        title: 'Login',
-        errors: [{ msg: 'Invalid username or password' }],
-      });
-    }
+		if (!isMatch) {
+			return res.status(400).render('login', {
+				title: 'Login',
+				errors: [{ msg: 'Invalid username or password' }],
+			});
+		}
 
-    req.login(user, (err) => {
-      if (err) {
-        return res.status(500).render('login', {
-          title: 'Login',
-          errors: [{ msg: 'There was an error logging in. Please try again.' }],
-        });
-      }
-      res.redirect('/');
-    });
+		req.login(user, (err) => {
+			if (err) {
+				return res.status(500).render('login', {
+					title: 'Login',
+					errors: [{ msg: 'There was an error logging in. Please try again.' }],
+				});
+			}
+			res.redirect('/');
+		});
 	} catch (error) {
 		console.error(error);
 		return res.status(500).render('login', {
-      title: 'Login',
-      errors: [{ msg: 'An error occurred during login. Please try again.' }],
-    });
+			title: 'Login',
+			errors: [{ msg: 'An error occurred during login. Please try again.' }],
+		});
 	}
 };
 
