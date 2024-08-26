@@ -1,21 +1,23 @@
-import pool from '../pool';
+const pool = require('../pool');
 
 const getUsers = async () => {
 	const { rows } = await pool.query('SELECT * FROM users');
 	return rows;
 };
 
-const getUserById = async (id: number) => {
+const getUserById = async (id) => {
 	const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
 	return rows[0];
 };
 
-const getUserByUsername = async (username: string) => {
-	const { rows } = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+const getUserByUsername = async (username) => {
+	const { rows } = await pool.query('SELECT * FROM users WHERE username = $1', [
+		username,
+	]);
 	return rows[0];
-}
+};
 
-const createUser = async (full_name: string, username: string, password: string) => {
+const createUser = async (full_name, username, password) => {
 	const { rows } = await pool.query(
 		'INSERT INTO users (full_name, username, password) VALUES ($1, $2, $3) RETURNING *',
 		[full_name, username, password],
@@ -23,7 +25,7 @@ const createUser = async (full_name: string, username: string, password: string)
 	return rows;
 };
 
-const updateUser = async (id: string, full_name: string, username: string, password: string, is_member: boolean) => {
+const updateUser = async (id, full_name, username, password, is_member) => {
 	const { rows } = await pool.query(
 		'UPDATE users SET full_name = $1, username = $2, password = $3, is_member = $4 WHERE id = $5 RETURNING *',
 		[full_name, username, password, is_member, id],
@@ -31,7 +33,7 @@ const updateUser = async (id: string, full_name: string, username: string, passw
 	return rows;
 };
 
-const deleteUser = async (id: string) => {
+const deleteUser = async (id) => {
 	const { rows } = await pool.query(
 		'DELETE FROM users WHERE id = $1 RETURNING *',
 		[id],
@@ -39,4 +41,11 @@ const deleteUser = async (id: string) => {
 	return rows;
 };
 
-export { getUsers, getUserById, getUserByUsername, createUser, updateUser, deleteUser };
+module.exports = {
+	getUsers,
+	getUserById,
+	getUserByUsername,
+	createUser,
+	updateUser,
+	deleteUser,
+};
