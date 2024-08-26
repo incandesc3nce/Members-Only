@@ -22,10 +22,10 @@ const signUpPostController = async (req: Request, res: Response) => {
 		.trim()
 		.notEmpty()
 		.withMessage('Username is required')
-		.isLength({ min: 3 })
-		.withMessage('Username must be at least 3 characters long')
-		.isLength({ max: 20 })
-		.withMessage('Username must be at most 20 characters long')
+		.isLength({ min: 8 })
+		.withMessage('Username must be at least 8 characters long')
+		.isLength({ max: 24 })
+		.withMessage('Username must be at most 24 characters long')
 		.matches(/^[a-zA-Z0-9_.]+$/)
 		.withMessage(
 			'Username must contain only letters, numbers, underscores, and periods',
