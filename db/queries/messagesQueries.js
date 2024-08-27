@@ -12,18 +12,18 @@ const getMessageById = async (id) => {
 	return rows[0];
 };
 
-const createMessage = async (text) => {
+const createMessage = async (title, body) => {
 	const { rows } = await pool.query(
-		'INSERT INTO messages (text) VALUES ($1) RETURNING *',
-		[text],
+		'INSERT INTO messages (title, body) VALUES ($1, $2) RETURNING *',
+		[title, body],
 	);
 	return rows[0];
 };
 
-const updateMessage = async (id, text) => {
+const updateMessage = async (id, title, body) => {
 	const { rows } = await pool.query(
-		'UPDATE messages SET text = $2 WHERE id = $1 RETURNING *',
-		[id, text],
+		'UPDATE messages SET title = $2, body = $3 WHERE id = $1 RETURNING *',
+		[id, title, body],
 	);
 	return rows;
 };
