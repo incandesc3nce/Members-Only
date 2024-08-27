@@ -15,6 +15,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// initialize persistent session storage
+
 app.use(session({
 	store: new PgSession({
 		pool: require('./db/pool'),
@@ -29,6 +31,8 @@ app.use(session({
 
 app.use(passport.session());
 
+// routing
+
 app.get('/', (req, res) => {
 	res.render('index', { title: 'Home', user: req.user });
 });
@@ -38,6 +42,9 @@ app.use('/login', loginRouter);
 
 app.get('/logout', logoutController);
 
+// error handling
+
+// 404 if requested route was not found, then pass to error handler
 
 app.use((req, res, next) => {
 	res.status(404).send('404 Not Found');
