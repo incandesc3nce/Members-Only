@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport.config');
 const path = require('path');
-const signUp = require('./controllers/signUpController');
+const {signUpController, signUpPostController} = require('./controllers/signUpController');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
 	res.render('index', { title: 'Home' });
 });
 
-app.get('/sign-up', signUp.signUpController);
-app.post('/sign-up', signUp.signUpPostController);
+app.get('/sign-up', signUpController);
+app.post('/sign-up', signUpPostController);
 
 
 app.use((req, res, next) => {

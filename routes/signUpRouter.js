@@ -1,12 +1,12 @@
-import { Router } from 'express';
-import {
+const { Router } = require('express');
+const {
 	signUpController,
 	signUpPostController,
-} from '../controllers/signUpController';
+} = require('../controllers/signUpController');
 
 const signUpRouter = Router();
 
 signUpRouter.get('/', signUpController);
 signUpRouter.post('/', signUpPostController);
 
-export default signUpRouter;
+module.exports = signUpRouter;

@@ -1,4 +1,4 @@
-const createUser = require('../db/queries/usersQueries');
+const { createUser } = require('../db/queries/usersQueries');
 const hashPassword = require('../utils/hashPassword');
 
 const signUpController = async (req, res) => {
