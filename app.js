@@ -12,6 +12,7 @@ const { getMessages } = require('./db/queries/messagesQueries');
 const formatDate = require('./utils/formatDate');
 const { getUserById } = require('./db/queries/usersQueries');
 const joinRouter = require('./routes/joinRouter');
+const adminRouter = require('./routes/adminRouter');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -44,7 +45,8 @@ app.get('/', async (req, res) => {
 		messages = await getMessages();
 		messages.map(async (message) => {
 			message.date = formatDate(message.date);
-			message.author = await getUserById(message.author_id).full_name;
+			const user = await getUserById(message.author_id);
+			message.author = user.full_name;
 		})
 	}
 	
@@ -55,6 +57,7 @@ app.use('/sign-up', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/new', newMessageRouter);
 app.use('/join', joinRouter);
+app.use('/admin', adminRouter);
 
 app.get('/logout', logoutController);
 
