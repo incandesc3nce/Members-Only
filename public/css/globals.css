@@ -3,19 +3,19 @@
 /* css reset */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
 }
 input,
 button,
 textarea,
 select {
-  font: inherit;
+	font: inherit;
 }
 p,
 h1,
@@ -24,141 +24,164 @@ h3,
 h4,
 h5,
 h6 {
-  overflow-wrap: break-word;
+	overflow-wrap: break-word;
 }
 #root,
 #__next {
-  isolation: isolate;
+	isolation: isolate;
 }
-
 
 /* global styles */
 
 :root {
-  --primary-color: #c46800;
-  --body-bg: #121212;
-  --card-bg: #282828;
-  --error-bg: #cf0000;
+	--primary-color: #c46800;
+	--body-bg: #121212;
+	--card-bg: #282828;
+	--error-bg: #cf0000;
 }
 
 * {
-  font-family: 'Inter', sans-serif;
-  color: #fff;
+	font-family: 'Inter', sans-serif;
+	color: #fff;
 }
 
 header {
-  min-height: 5vh;
-  background-color: var(--primary-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  top: 0;
+	min-height: 5vh;
+	background-color: var(--primary-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: sticky;
+	top: 0;
+}
+
+.navbar {
+	padding: 0 1rem;
+	width: 100%;
+}
+
+.nav-list {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	list-style: none;
+}
+
+.nav-list li {
+	transition: all 0.2s;
+}
+
+.nav-list a {
+	text-decoration: none;
+}
+
+.nav-list li:hover {
+	transform: scale(1.1);
 }
 
 main {
-  min-height: 90vh;
-  background-color: var(--body-bg);
+	min-height: 90vh;
+	background-color: var(--body-bg);
 }
 
 footer {
-  min-height: 5vh;
-  background-color: var(--primary-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  bottom: 0;
+	min-height: 5vh;
+	background-color: var(--primary-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: sticky;
+	bottom: 0;
 }
 
 footer a {
-  color: rgb(0, 47, 255);
-  font-weight: 500;
+	color: rgb(0, 47, 255);
+	font-weight: 500;
 }
 
 label {
-  font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 input {
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  border: 2px solid var(--primary-color);
-  border-radius: 10px;
-  background-color: var(--card-bg);
-  transition: all 0.3s;
+	padding: 0.5rem;
+	font-size: 1.5rem;
+	border: 2px solid var(--primary-color);
+	border-radius: 10px;
+	background-color: var(--card-bg);
+	transition: all 0.3s;
 }
 
 input:focus {
-  outline: none;
-  box-shadow: 0 0 10px 3px var(--primary-color);
+	outline: none;
+	box-shadow: 0 0 10px 3px var(--primary-color);
 }
 
 button[type='submit'] {
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  border: 2px solid var(--primary-color);
-  border-radius: 10px;
-  background-color: var(--primary-color);
-  color: var(--body-bg);
-  transition: all 0.3s;
-  cursor: pointer;
-  font-weight: 600;
+	padding: 0.5rem 1rem;
+	font-size: 1.5rem;
+	border: 2px solid var(--primary-color);
+	border-radius: 10px;
+	background-color: var(--primary-color);
+	color: var(--body-bg);
+	transition: all 0.3s;
+	cursor: pointer;
+	font-weight: 600;
 }
 
 button[type='submit']:disabled {
-  cursor: not-allowed;
-  background-color: var(--body-bg);
-  color: var(--primary-color);
+	cursor: not-allowed;
+	background-color: var(--body-bg);
+	color: var(--primary-color);
 }
 
 button[type='submit']:hover {
-  background-color: var(--body-bg);
-  color: var(--primary-color);
+	background-color: var(--body-bg);
+	color: var(--primary-color);
 }
 
 .hidden {
-  display: none!important;
+	display: none !important;
 }
 
 .valid {
-  color: #00ff00;
+	color: #00ff00;
 }
 
 svg {
-  width: 32px;
-  height: auto;
-  fill: #fff;
+	width: 32px;
+	height: auto;
+	fill: #fff;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
 form div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
 
 form ul {
-  padding-right: 1.1rem;
+	padding-right: 1.1rem;
 }
 
 .error {
-  background-color: var(--error-bg);
-  padding: 0.5rem;
-  border-radius: 10px;
+	background-color: var(--error-bg);
+	padding: 0.5rem;
+	border-radius: 10px;
 }
 
 .errors {
-  list-style: none;
+	list-style: none;
 }
 
 .errors li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 }
