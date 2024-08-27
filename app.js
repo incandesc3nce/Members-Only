@@ -6,6 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const usersQueries = require('./db/queries/usersQueries');
+const signUp = require('./controllers/signUpController');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -61,6 +62,10 @@ passport.deserializeUser(async (id, done) => {
 app.get('/', (req, res) => {
 	res.render('index', { title: 'Home' });
 });
+
+app.get('/sign-up', signUp.signUpController);
+app.post('/sign-up', signUp.signUpPostController);
+
 
 app.use((req, res, next) => {
 	res.status(404).send('404 Not Found');
