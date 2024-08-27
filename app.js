@@ -11,6 +11,7 @@ const PgSession = require('connect-pg-simple')(session);
 const { getMessages } = require('./db/queries/messagesQueries');
 const formatDate = require('./utils/formatDate');
 const { getUserById } = require('./db/queries/usersQueries');
+const joinRouter = require('./routes/joinRouter');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -53,6 +54,7 @@ app.get('/', async (req, res) => {
 app.use('/sign-up', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/new', newMessageRouter);
+app.use('/join', joinRouter);
 
 app.get('/logout', logoutController);
 
