@@ -1,4 +1,4 @@
-const { createUser } = require('../db/queries/usersQueries');
+const { createUser, getUserByUsername } = require('../db/queries/usersQueries');
 const hashPassword = require('../utils/hashPassword');
 
 const signUpController = async (req, res) => {
@@ -10,6 +10,15 @@ const signUpController = async (req, res) => {
 const signUpPostController = async (req, res, next) => {
 	try {
 		const { full_name, username, password } = req.body;
+		
+		const userExists = await getUserByUsername(username);
+		if (userExists) {
+			return res.render('sign-up', {
+				title: 'Sign Up',
+				errors: [{msg: 'Username already exists'}],
+			});
+		}
+
     const hashedPassword = await hashPassword(password);
 		await createUser(full_name, username, hashedPassword);
 		res.redirect('/login');
