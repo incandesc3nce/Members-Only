@@ -1,5 +1,6 @@
 const { createUser, getUserByUsername } = require('../db/queries/usersQueries');
 const hashPassword = require('../utils/hashPassword');
+const passport = require('../config/passport.config');
 
 const signUpController = async (req, res) => {
 	res.render('sign-up', {
@@ -9,7 +10,7 @@ const signUpController = async (req, res) => {
 
 const signUpPostController = async (req, res, next) => {
 	try {
-		const { full_name, username, password } = req.body;
+		const { first_name, last_name, username, password } = req.body;
 		
 		const userExists = await getUserByUsername(username);
 		if (userExists) {
@@ -19,9 +20,15 @@ const signUpPostController = async (req, res, next) => {
 			});
 		}
 
+		const full_name = `${first_name} ${last_name}`;
     const hashedPassword = await hashPassword(password);
 		await createUser(full_name, username, hashedPassword);
-		res.redirect('/login');
+
+		passport.authenticate('local', {
+			successRedirect: '/',
+			failureRedirect: '/login',
+			failureFlash: true,
+		})(req, res, next);
 	} catch (err) {
 		return next(err);
 	}
