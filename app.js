@@ -43,11 +43,12 @@ app.get('/', async (req, res) => {
 	let messages = [];
 	if (req.user) {
 		messages = await getMessages();
-		messages.map(async (message) => {
+		messages = await Promise.all(messages.map(async (message) => {
 			message.date = formatDate(message.date);
 			const user = await getUserById(message.author_id);
 			message.author = user.full_name;
-		})
+			return message;
+		}));
 	}
 	
 	res.render('index', { title: 'Home', user: req.user, messages: messages });
