@@ -3,5 +3,13 @@
 <%- include('partials/head', { title: title }) %>
 <body>
   <h1>This is a secret club</h1>
+  <p><%= (user) ? 'you can see this if you are auth' : '' %></p>
+  <p><%= (user) ? 'Welcome ' + user.username : '' %></p>
+  <% if (user) { %>
+    <a href="/logout">Log out</a>
+  <% } else { %>
+    <a href="/sign-up">Sign up</a>
+    <a href="/login">Log in</a>
+  <% } %>
 </body>
 </html>
