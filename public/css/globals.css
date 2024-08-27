@@ -122,7 +122,7 @@ label {
 	font-size: 1.5rem;
 }
 
-input {
+input, textarea {
 	padding: 0.5rem;
 	font-size: 1.5rem;
 	border: 2px solid var(--primary-color);
@@ -131,7 +131,13 @@ input {
 	transition: all 0.3s;
 }
 
-input:focus {
+textarea {
+	height: 400px;
+	width: 100%;
+	resize: vertical;
+}
+
+input:focus, textarea:focus {
 	outline: none;
 	box-shadow: 0 0 10px 3px var(--primary-color);
 }
