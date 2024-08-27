@@ -1,4 +1,3 @@
-const { getUserByUsername } = require('../db/queries/usersQueries');
 const passport = require('../config/passport.config');
 
 const loginController = async (req, res) => {
