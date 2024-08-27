@@ -8,6 +8,9 @@ const logoutController = require('./controllers/logoutController');
 const loginRouter = require('./routes/loginRouter');
 const newMessageRouter = require('./routes/newMessageRouter');
 const PgSession = require('connect-pg-simple')(session);
+const { getMessages } = require('./db/queries/messagesQueries');
+const formatDate = require('./utils/formatDate');
+const { getUserById } = require('./db/queries/usersQueries');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -34,8 +37,17 @@ app.use(passport.session());
 
 // routing
 
-app.get('/', (req, res) => {
-	res.render('index', { title: 'Home', user: req.user });
+app.get('/', async (req, res) => {
+	let messages = [];
+	if (req.user) {
+		messages = await getMessages();
+		messages.map(async (message) => {
+			message.date = formatDate(message.date);
+			message.author = await getUserById(message.author_id).full_name;
+		})
+	}
+	
+	res.render('index', { title: 'Home', user: req.user, messages: messages });
 });
 
 app.use('/sign-up', signUpRouter);
