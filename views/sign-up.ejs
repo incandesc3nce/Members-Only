@@ -2,16 +2,100 @@
 <html lang="en">
 <%- include('partials/head', { title: title }) %>
 <body>
-  <h1>Sign up</h1>
-  <form action="/sign-up" method="POST">
-    <label for="first_name">First Name:</label>
-    <input type="text" name="first_name" id="firstName">
-    <label for="last_name">Last Name:</label>
-    <input type="text" name="last_name" id="lastName">
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password">
-    <button type="submit">Sign up</button>
+  <main class="sign-up-page">
+    <form action="/sign-up" method="POST">
+      <div class="error <%= errors.length === 0 ? 'hidden' : '' %>">
+        <ul class="errors">
+          <% errors.map(error => { %>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z" /></svg>
+              <span><%= error.msg %></span>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+      <div>
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="firstName">
+      </div>
+      <div>
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="lastName">
+      </div>
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+      </div>
+      <p>Password must:</p>
+          <ul>
+            <li id="length">Be between 8 and 24 characters</li>
+            <li id="lowercase">Have at least 1 lowercase letter</li>
+            <li id="uppercase">Have at least 1 uppercase letter</li>
+            <li id="numbers">Have at least 1 number</li>
+          </ul>
+      <div>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" name="confirm_password" id="confirmPassword">
+      </div>
+      <button type="submit" disabled>Sign up</button>
+    </form>
+  </main>
+  <%- include('partials/footer') %>
+
+    <script>
+      const passwordInput = document.getElementById('password');
+      passwordInput.addEventListener('input', function() {
+        const password = passwordInput.value;
+        const lengthRegex = /.{8,24}/;
+        const lowercaseRegex = /[a-z]/;
+        const uppercaseRegex = /[A-Z]/;
+        const numbersRegex = /[0-9]/;
+  
+        const length = lengthRegex.test(password);
+        const lowercase = lowercaseRegex.test(password);
+        const uppercase = uppercaseRegex.test(password);
+        const numbers = numbersRegex.test(password);
+  
+        const lengthLi = document.getElementById('length');
+        const lowercaseLi = document.getElementById('lowercase');
+        const uppercaseLi = document.getElementById('uppercase');
+        const numbersLi = document.getElementById('numbers');
+  
+        if (length) {
+          lengthLi.classList.add('valid');
+        } else {
+          lengthLi.classList.remove('valid');
+        }
+  
+        if (lowercase) {
+          lowercaseLi.classList.add('valid');
+        } else {
+          lowercaseLi.classList.remove('valid');
+        }
+  
+        if (uppercase) {
+          uppercaseLi.classList.add('valid');
+        } else {
+          uppercaseLi.classList.remove('valid');
+        }
+  
+        if (numbers) {
+          numbersLi.classList.add('valid');
+        } else {
+          numbersLi.classList.remove('valid');
+        }
+        
+        const button = document.querySelector('button');
+        if (length && lowercase && uppercase && numbers) {
+          button.removeAttribute('disabled');
+        } else {
+          button.setAttribute('disabled', true);
+        }
+      });
+    </script>
 </body>
 </html>
