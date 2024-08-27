@@ -8,7 +8,7 @@ passport.use(new LocalStrategy(
 		try {
 			const user = await usersQueries.getUserByUsername(username);
 			if (!user) {
-				return done(null, false, { message: 'Incorrect username or password.' });
+				return done(null, false, { message: 'This user does not exist.' });
 			}
 			
 			const valid = await bcrypt.compare(password, user.password);
