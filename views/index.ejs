@@ -2,14 +2,30 @@
 <html lang="en">
 <%- include('partials/head', { title: title }) %>
 <body>
-  <h1>This is a secret club</h1>
-  <p><%= (user) ? 'you can see this if you are auth' : '' %></p>
-  <p><%= (user) ? 'Welcome ' + user.username : '' %></p>
-  <% if (user) { %>
-    <a href="/logout">Log out</a>
+  <% if (user) {  %>
+  <main class="messages">
+    
+  </main>
   <% } else { %>
-    <a href="/sign-up">Sign up</a>
-    <a href="/login">Log in</a>
+    <header>
+      <h1>Secret Club 🤫</h1>
+    </header>
+  <main class="hero-main">
+    <div class="hero-content">
+      <h2>Welcome to the Secret Club</h2>
+      <section class="options">
+        <div>
+          <p>Join now for more</p>
+          <a href="/sign-up" class="option-link">Sign up</a>
+        </div>
+        <div>
+          <p>Already a member?</p>
+          <a href="/login" class="option-link">Log in</a>
+        </div>
+      </section>
+    </div>
+  </main>
   <% } %>
+  <%- include('partials/footer') %>
 </body>
 </html>
