@@ -6,6 +6,7 @@ const path = require('path');
 const signUpRouter = require('./routes/signUpRouter');
 const logoutController = require('./controllers/logoutController');
 const loginRouter = require('./routes/loginRouter');
+const newMessageRouter = require('./routes/newMessageRouter');
 const PgSession = require('connect-pg-simple')(session);
 
 const app = express();
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
 
 app.use('/sign-up', signUpRouter);
 app.use('/login', loginRouter);
+app.use('/new', newMessageRouter);
 
 app.get('/logout', logoutController);
 
