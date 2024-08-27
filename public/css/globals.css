@@ -103,6 +103,7 @@ button[type='submit'] {
   color: var(--body-bg);
   transition: all 0.3s;
   cursor: pointer;
+  font-weight: 600;
 }
 
 button[type='submit']:disabled {
@@ -122,4 +123,10 @@ button[type='submit']:hover {
 
 .valid {
   color: #00ff00;
+}
+
+svg {
+  width: 32px;
+  height: auto;
+  fill: #fff;
 }
