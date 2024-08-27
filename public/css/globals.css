@@ -117,5 +117,9 @@ button[type='submit']:hover {
 }
 
 .hidden {
-  display: none;
+  display: none!important;
+}
+
+.valid {
+  color: #00ff00;
 }
