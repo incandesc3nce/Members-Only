@@ -30,3 +30,47 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+
+/* global styles */
+
+:root {
+  --primary-color: #c46800;
+  --body-bg: #121212;
+  --card-bg: #282828;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+}
+
+header {
+  min-height: 5vh;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+main {
+  min-height: 90vh;
+  background-color: var(--body-bg);
+}
+
+footer {
+  min-height: 5vh;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+}
+
+footer a {
+  color: rgb(0, 47, 255);
+  font-weight: 500;
+}
