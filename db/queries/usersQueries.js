@@ -33,6 +33,22 @@ const updateUser = async (id, full_name, username, password, is_member) => {
 	return rows;
 };
 
+const updateUserStatus = async (id) => {
+	const { rows } = await pool.query(
+		'UPDATE users SET is_member = TRUE WHERE id = $1 RETURNING *',
+		[id],
+	);
+	return rows;
+};
+
+const updateUserAdmin = async (id) => {
+	const { rows } = await pool.query(
+		'UPDATE users SET is_admin = TRUE WHERE id = $1 RETURNING *',
+		[id],
+	);
+	return rows;
+};
+
 const deleteUser = async (id) => {
 	const { rows } = await pool.query(
 		'DELETE FROM users WHERE id = $1 RETURNING *',
@@ -47,5 +63,7 @@ module.exports = {
 	getUserByUsername,
 	createUser,
 	updateUser,
+	updateUserStatus,
+	updateUserAdmin,
 	deleteUser,
 };
