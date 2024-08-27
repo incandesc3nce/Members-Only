@@ -1,7 +1,11 @@
 const { createMessage } = require('../db/queries/messagesQueries');
 
 const newMessageGetController = async (req, res) => {
-	res.render('new', { title: 'New Message', user: req.user });
+	if (!req.user) {
+		return res.redirect('/login');
+	}
+
+	return res.render('new', { title: 'New Message', user: req.user });
 };
 
 const newMessagePostController = async (req, res) => {

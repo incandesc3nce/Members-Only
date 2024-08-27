@@ -1,7 +1,11 @@
 const passport = require('../config/passport.config');
 
 const loginController = async (req, res) => {
-	res.render('login', {
+	if (req.user) {
+    return res.redirect('/');
+  }
+  
+  return res.render('login', {
 		title: 'Log In',
     error: '',
 	});
