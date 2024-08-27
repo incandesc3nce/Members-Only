@@ -42,11 +42,11 @@ PORT - The port for the server (default is 3000)
 ADMIN_PASSWORD - The password for the admin user
 ```
 
-4. Create a PostgreSQL database named inventory, connect to it
+4. Create a PostgreSQL database named members, connect to it
 
 ```SQL
-CREATE DATABASE inventory;
-\c inventory; /* psql connect */
+CREATE DATABASE members;
+\c members; /* psql connect */
 ```
 
 and run the following command in your terminal to populate the database with the necessary tables and example data
