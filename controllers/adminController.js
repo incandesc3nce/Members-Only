@@ -6,7 +6,7 @@ const adminController = async (req, res) => {
 		return res.redirect('/');
 	}
 
-	res.render('admin', { title: 'Admin', user: req.user });
+	res.render('admin', { title: 'Admin', user: req.user, error: '' });
 };
 
 const adminPostController = async (req, res) => {

@@ -5,6 +5,9 @@
   <%- include('partials/header', { user: user }) %>
   <main class="admin-page">
     <form action="/admin" method="post">
+      <div class="error <%= error === '' ? 'hidden' : '' %>">
+        <p><%= error %></p>
+      </div>
       <h2>You need a secret password to be an admin...</h2>
       <label for="answer">Secret password</label>
       <input type="text" id="answer" name="answer" required>
