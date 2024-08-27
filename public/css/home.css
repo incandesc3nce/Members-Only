@@ -83,3 +83,12 @@
   display: flex;
   justify-content: space-between;
 }
+
+.no-messages {
+  font-size: 2rem;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
