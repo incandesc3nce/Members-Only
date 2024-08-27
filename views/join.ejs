@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: title }) %>
+<body>
+  <%- include('partials/header', { user: user }) %>
+  <main class="join-page">
+    <form action="/join" method="post">
+      <h2>Join the Secret Club</h2>
+      <label for="answer">What's the meaning of life?</label>
+      <input type="text" id="answer" name="answer" required>
+      <button type="submit">Join</button>
+    </form>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

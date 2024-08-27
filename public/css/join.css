@@ -1,4 +1,4 @@
-.new-page {
+.join-page {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,15 +7,11 @@
   height: 90vh;
 }
 
-.new-page form {
-  width: 50%;
-}
-
-.new-page a {
+.join-page a {
   color: var(--primary-color);
   transition: color 0.3s;
 }
 
-.new-page a:hover {
+.join-page a:hover {
   color: #fff;
 }
