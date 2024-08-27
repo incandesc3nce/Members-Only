@@ -6,6 +6,7 @@ const path = require('path');
 const signUpRouter = require('./routes/signUpRouter');
 const logoutController = require('./controllers/logoutController');
 const loginRouter = require('./routes/loginRouter');
+const PgSession = require('connect-pg-simple')(session);
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -15,10 +16,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(session({
+	store: new PgSession({
+		pool: require('./db/pool'),
+		tableName: 'session',
+		createTableIfMissing: true,
+	}),
 	secret: process.env.SESSION_SECRET || 'secret',
 	resave: false,
 	saveUninitialized: false,
-	cookie: { sameSite: 'strict' },
+	cookie: { sameSite: 'strict', maxAge: 1000 * 60 * 60 * 24 * 3 }, // 3 days
 }));
 
 app.use(passport.session());
