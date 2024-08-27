@@ -38,6 +38,7 @@ h6 {
   --primary-color: #c46800;
   --body-bg: #121212;
   --card-bg: #282828;
+  --error-bg: #cf0000;
 }
 
 * {
