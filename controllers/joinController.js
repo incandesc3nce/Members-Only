@@ -14,7 +14,7 @@ const joinPostController = async (req, res) => {
 		await updateUserStatus(req.user.id);
 		return res.redirect('/');
 	} else {
-		return res.render('join', { title: 'Join', error: 'Wrong answer!' });
+		return res.render('join', { title: 'Join', user: req.user, error: 'Wrong answer!' });
 	}
 };
 

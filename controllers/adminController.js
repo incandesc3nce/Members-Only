@@ -15,7 +15,7 @@ const adminPostController = async (req, res) => {
 		await updateUserAdmin(req.user.id);
 		return res.redirect('/');
 	} else {
-		res.render('admin', { title: 'Admin', error: 'Wrong password!' });
+		res.render('admin', { title: 'Admin', user: req.user, error: 'Wrong password!' });
 	}
 };
 
