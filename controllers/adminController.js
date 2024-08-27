@@ -10,8 +10,8 @@ const adminController = async (req, res) => {
 };
 
 const adminPostController = async (req, res) => {
-	const { password } = req.body;
-	if (password === process.env.ADMIN_PASSWORD) {
+	const { answer } = req.body;
+	if (answer === process.env.ADMIN_PASSWORD) {
 		await updateUserAdmin(req.user.id);
 		return res.redirect('/');
 	} else {
