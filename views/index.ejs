@@ -15,6 +15,13 @@
               <p><%= user.is_member ? message.date : 'Date: Hidden' %></p>
               <p>By: <%= user.is_member || user.id === message.author_id ? message.author : 'Hidden' %></p>
             </div>
+            <% if (user.is_admin) { %>
+            <div>
+              <a href="/delete/<%= message.id %>" class="delete-message">
+                Delete message
+              </a>
+            </div>
+            <% } %>
           </li>
         <% }) %>
       </ul>

@@ -13,6 +13,7 @@ const formatDate = require('./utils/formatDate');
 const { getUserById } = require('./db/queries/usersQueries');
 const joinRouter = require('./routes/joinRouter');
 const adminRouter = require('./routes/adminRouter');
+const deleteController = require('./controllers/deleteController');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -23,17 +24,19 @@ app.set('view engine', 'ejs');
 
 // initialize persistent session storage
 
-app.use(session({
-	store: new PgSession({
-		pool: require('./db/pool'),
-		tableName: 'session',
-		createTableIfMissing: true,
+app.use(
+	session({
+		store: new PgSession({
+			pool: require('./db/pool'),
+			tableName: 'session',
+			createTableIfMissing: true,
+		}),
+		secret: process.env.SESSION_SECRET || 'secret',
+		resave: false,
+		saveUninitialized: false,
+		cookie: { sameSite: 'strict', maxAge: 1000 * 60 * 60 * 24 * 3 }, // 3 days
 	}),
-	secret: process.env.SESSION_SECRET || 'secret',
-	resave: false,
-	saveUninitialized: false,
-	cookie: { sameSite: 'strict', maxAge: 1000 * 60 * 60 * 24 * 3 }, // 3 days
-}));
+);
 
 app.use(passport.session());
 
@@ -43,14 +46,16 @@ app.get('/', async (req, res) => {
 	let messages = [];
 	if (req.user) {
 		messages = await getMessages();
-		messages = await Promise.all(messages.map(async (message) => {
-			message.date = formatDate(message.date);
-			const user = await getUserById(message.author_id);
-			message.author = user.full_name;
-			return message;
-		}));
+		messages = await Promise.all(
+			messages.map(async (message) => {
+				message.date = formatDate(message.date);
+				const user = await getUserById(message.author_id);
+				message.author = user.full_name;
+				return message;
+			}),
+		);
 	}
-	
+
 	res.render('index', { title: 'Home', user: req.user, messages: messages });
 });
 
@@ -60,6 +65,7 @@ app.use('/new', newMessageRouter);
 app.use('/join', joinRouter);
 app.use('/admin', adminRouter);
 
+app.use('/delete/:id', deleteController);
 app.get('/logout', logoutController);
 
 // error handling

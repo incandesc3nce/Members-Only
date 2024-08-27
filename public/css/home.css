@@ -92,3 +92,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.delete-message {
+  background-color: var(--error-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: auto;
+}
