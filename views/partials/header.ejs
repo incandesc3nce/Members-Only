@@ -5,7 +5,10 @@
 			<li><a href="/new">New Message</a></li>
 			<li><a href="/contact">Join the club</a></li>
 			<li><a href="/admin">Become an admin</a></li>
-      <li>Hello, <%= user.full_name.split(' ')[0] %></li>
+      <div>
+        <p>Hello, <%= user.full_name.split(' ')[0] %></p>
+        <a href="/logout">Log out</a>
+      </div>
 		</ul>
 	</nav>
 </header>

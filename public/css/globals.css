@@ -67,8 +67,27 @@ header {
 	list-style: none;
 }
 
+.nav-list div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.nav-list div a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: 500;
+	transition: all 0.2s;
+}
+
+.nav-list div a:hover {
+	scale: 1.1;
+}
+
 .nav-list li {
 	transition: all 0.2s;
+	display: flex;
+	align-items: center;
 }
 
 .nav-list a {
