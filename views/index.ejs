@@ -3,9 +3,24 @@
 <%- include('partials/head', { title: title }) %>
 <body>
   <% if (user) {  %>
-    <%- include('partials/header', { user: user}) %>
+    <%- include('partials/header', { user: user }) %>
   <main class="messages">
-    
+    <% if (messages.length > 0) { %>
+      <ul class="messages-list">
+        <% messages.forEach(message => { %>
+          <li class="message">
+            <h2><%= message.title %></h2>
+            <p><%= message.body %></p>
+            <div>
+              <p><%= message.date %></p>
+              <p>By: <%= user.is_member ? message.author : 'Hidden' %></p>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No messages yet. <a href="/new">Make a first message.</a></p>
+    <% } %>
   </main>
   <% } else { %>
     <header>
