@@ -13,7 +13,7 @@
             <p><%= message.body %></p>
             <div>
               <p><%= user.is_member ? message.date : 'Date: Hidden' %></p>
-              <p>By: <%= user.is_member ? message.author : 'Hidden' %></p>
+              <p>By: <%= user.is_member || user.id === message.author_id ? message.author : 'Hidden' %></p>
             </div>
           </li>
         <% }) %>
