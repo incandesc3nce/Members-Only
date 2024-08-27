@@ -12,10 +12,10 @@ const getMessageById = async (id) => {
 	return rows[0];
 };
 
-const createMessage = async (title, body) => {
+const createMessage = async (title, body, author_id) => {
 	const { rows } = await pool.query(
 		'INSERT INTO messages (title, body) VALUES ($1, $2) RETURNING *',
-		[title, body],
+		[title, body, author_id],
 	);
 	return rows[0];
 };
