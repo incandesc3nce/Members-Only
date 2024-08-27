@@ -4,6 +4,7 @@ const session = require('express-session');
 const passport = require('./config/passport.config');
 const path = require('path');
 const {signUpController, signUpPostController} = require('./controllers/signUpController');
+const logoutController = require('./controllers/logoutController');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -22,11 +23,13 @@ app.use(session({
 app.use(passport.session());
 
 app.get('/', (req, res) => {
-	res.render('index', { title: 'Home' });
+	res.render('index', { title: 'Home', user: req.user });
 });
 
 app.get('/sign-up', signUpController);
 app.post('/sign-up', signUpPostController);
+
+app.get('/logout', logoutController);
 
 
 app.use((req, res, next) => {
