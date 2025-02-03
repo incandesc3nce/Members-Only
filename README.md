@@ -17,7 +17,7 @@ This project is about creating a simple authentication system using Passport.js 
 
 ## Live Preview
 
-Live preview is available at [Members-Only](https://members-only-production-7e71.up.railway.app/).
+Live preview is available at [Members-Only](https://members-only-oofo.onrender.com/) (Render, will take time to visit).
 
 ## Installation
 
